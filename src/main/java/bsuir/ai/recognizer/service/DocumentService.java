@@ -17,6 +17,6 @@ public interface DocumentService {
 
     void saveAll(List<Document> documents);
 
-    RecognizeResult recognize(MultipartFile file);
+    List<RecognizeResult> recognize(MultipartFile file);
 }
 

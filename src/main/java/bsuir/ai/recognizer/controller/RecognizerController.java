@@ -10,14 +10,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.util.List;
+
 @RestController
 public class RecognizerController {
     @Autowired
     private DocumentService documentService;
 
     @GetMapping("/recognize")
-    public ResponseEntity<RecognizeResult> recognize(@RequestParam("documents") MultipartFile file) {
-        RecognizeResult recognizeResult = documentService.recognize(file);
-        return new ResponseEntity<>(recognizeResult, HttpStatus.OK);
+    public ResponseEntity recognize(@RequestParam("documents") MultipartFile file) {
+        List<RecognizeResult> recognizeResults = documentService.recognize(file);
+        return new ResponseEntity<>(recognizeResults, HttpStatus.OK);
     }
 }

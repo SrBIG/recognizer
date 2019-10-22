@@ -12,6 +12,6 @@ import lombok.NoArgsConstructor;
 public class RecognizeResult {
     private Integer rank;
     private Language language;
-    private Document testedDocument;
+    private String testedDocument;
     private Document foundedDocument;
 }

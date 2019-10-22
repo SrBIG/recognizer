@@ -55,15 +55,15 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public RecognizeResult recognize(MultipartFile file) {
+    public List<RecognizeResult> recognize(MultipartFile file) {
         // TODO : add normal file handling
         if (Objects.isNull(file) || file.isEmpty()) {
             return null;
         }
-        String text = null;
         try {
-            text = new String(file.getBytes());
-            return RecognizeUtils.recognize(text);
+            String text = new String(file.getBytes());
+            List<Document> docs = documentRepository.findAll();
+            return RecognizeUtils.recognize(text, docs);
         } catch (IOException e) {
             e.printStackTrace();
         }
