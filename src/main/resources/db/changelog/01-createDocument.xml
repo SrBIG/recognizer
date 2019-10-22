@@ -11,6 +11,9 @@
             <column name="document_text" type="text">
                 <constraints nullable="false"/>
             </column>
+            <column name="document_lang" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
         </createTable>
     </changeSet>
 </databaseChangeLog>
