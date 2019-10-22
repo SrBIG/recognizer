@@ -42,5 +42,5 @@ public class Document {
     @CollectionTable(name = "gram_count", joinColumns = @JoinColumn(name = "document_id"))
     @MapKeyJoinColumn(name = "gram")
     @Column(name = "count")
-    private Map<String, Integer> wordWeight;
+    private Map<String, Integer> gramWeight;
 }

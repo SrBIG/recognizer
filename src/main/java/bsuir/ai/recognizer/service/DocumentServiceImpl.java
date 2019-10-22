@@ -2,13 +2,19 @@ package bsuir.ai.recognizer.service;
 
 import bsuir.ai.recognizer.model.Document;
 import bsuir.ai.recognizer.model.Language;
+import bsuir.ai.recognizer.model.RecognizeResult;
 import bsuir.ai.recognizer.repository.DocumentRepository;
+import bsuir.ai.recognizer.util.RecognizeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
+@Service("documentService")
 public class DocumentServiceImpl implements DocumentService {
     @Autowired
     private DocumentRepository documentRepository;
@@ -31,7 +37,8 @@ public class DocumentServiceImpl implements DocumentService {
         try {
             String text = new String(file.getBytes());
             Language language = Language.parse(lang);
-            Document document = createDocument(text, language);
+            Map<String, Integer> image = RecognizeUtils.makeImage(text);
+            Document document = createDocument(text, language, image);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -47,10 +54,27 @@ public class DocumentServiceImpl implements DocumentService {
         documentRepository.saveAll(documents);
     }
 
-    private Document createDocument(String text, Language language) {
+    @Override
+    public RecognizeResult recognize(MultipartFile file) {
+        // TODO : add normal file handling
+        if (Objects.isNull(file) || file.isEmpty()) {
+            return null;
+        }
+        String text = null;
+        try {
+            text = new String(file.getBytes());
+            return RecognizeUtils.recognize(text);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
+    }
+
+    private Document createDocument(String text, Language language, Map<String, Integer> image) {
         return Document.builder()
                 .language(language)
                 .text(text)
+                .gramWeight(image)
                 .build();
     }
 }
