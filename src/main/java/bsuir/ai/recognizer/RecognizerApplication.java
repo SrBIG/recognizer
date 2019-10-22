@@ -8,6 +8,7 @@ import org.springframework.boot.web.servlet.support.SpringBootServletInitializer
 @SpringBootApplication
 public class RecognizerApplication extends SpringBootServletInitializer {
 
+
     public static void main(String[] args) {
         SpringApplication.run(RecognizerApplication.class, args);
     }
