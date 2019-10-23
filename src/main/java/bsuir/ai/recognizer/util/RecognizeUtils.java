@@ -1,7 +1,6 @@
 package bsuir.ai.recognizer.util;
 
 import bsuir.ai.recognizer.model.Document;
-import bsuir.ai.recognizer.model.Language;
 import bsuir.ai.recognizer.model.RecognizeResult;
 
 import java.util.ArrayList;
@@ -11,6 +10,7 @@ import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 public class RecognizeUtils {
@@ -48,8 +48,8 @@ public class RecognizeUtils {
             for (Map.Entry<String, Integer> entry : image.entrySet()) {
                 String gram = entry.getKey();
                 Integer gramWeight = entry.getValue();
-                Integer rank = Math.abs(gramWeights.get(gram) - gramWeight);
-                Language language = doc.getLanguage();
+                Optional<Integer> docGramRank = Optional.ofNullable(gramWeights.get(gram));
+                Integer rank = Math.abs(docGramRank.orElse(MAX_N_GRAM_NUMBER) - gramWeight);
                 results.add(createRecognizeResult(rank, text, doc));
             }
         }
