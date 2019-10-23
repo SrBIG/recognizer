@@ -39,6 +39,7 @@ public class DocumentServiceImpl implements DocumentService {
             Language language = Language.parse(lang);
             Map<String, Integer> image = RecognizeUtils.makeImage(text);
             Document document = createDocument(text, language, image);
+            documentRepository.save(document);
         } catch (Exception e) {
             e.printStackTrace();
         }
