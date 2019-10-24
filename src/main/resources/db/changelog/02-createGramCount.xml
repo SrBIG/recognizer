@@ -5,8 +5,8 @@
 
     <changeSet id="create_gram_count" author="Ivan Biruchov">
         <createTable tableName="gram_count">
-            <column name="document_id" type="int" autoIncrement="true">
-                <constraints primaryKey="true" nullable="false"/>
+            <column name="document_id" type="int">
+                <constraints nullable="false"/>
             </column>
             <column name="gram" type="varchar(5)">
                 <constraints nullable="false"/>

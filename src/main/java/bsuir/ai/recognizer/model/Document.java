@@ -15,7 +15,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
-import javax.persistence.MapKeyJoinColumn;
+import javax.persistence.MapKeyColumn;
 import javax.persistence.Table;
 import java.util.Map;
 
@@ -40,7 +40,7 @@ public class Document {
 
     @ElementCollection
     @CollectionTable(name = "gram_count", joinColumns = @JoinColumn(name = "document_id"))
-    @MapKeyJoinColumn(name = "gram")
+    @MapKeyColumn(name = "gram")
     @Column(name = "count")
     private Map<String, Integer> gramWeight;
 }
