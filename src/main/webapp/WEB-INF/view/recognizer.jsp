@@ -23,7 +23,16 @@
     </button>
 </form>
 
-<script>var ctx = "${pageContext.servletContext.contextPath}"</script>
+<form name="recognizeForm" id="recognizeForm"
+      action="${pageContext.request.contextPath}/recognize" method="post"
+      enctype="multipart/form-data">
+    File to recognize:
+    <input id="recognitionDoc" name="recognitionDoc" type="file"/>
+    <button type="submit">
+        Recognize!
+    </button>
+</form>
+
 <script src="${pageContext.request.contextPath}/recognizeLogic.js"></script>
 </body>
 </html>

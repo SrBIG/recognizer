@@ -87,10 +87,10 @@ public class RecognizeUtils {
             list = list.subList(0, MAX_N_GRAM_NUMBER);
         }
         Map<String, Integer> result = new LinkedHashMap<>();
-        int index = 0;
+        int index = list.size();
         for (Map.Entry<String, Integer> entry : list) {
             result.put(entry.getKey(), index);
-            index++;
+            index--;
         }
         return result;
     }

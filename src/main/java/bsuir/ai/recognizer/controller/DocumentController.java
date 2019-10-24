@@ -20,7 +20,7 @@ public class DocumentController {
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity uploadDocument(@RequestParam("document") MultipartFile file,
                                          @RequestParam("language") String lang) {
-        documentService.add(file, lang);
+            documentService.add(file, lang);
         return new ResponseEntity(HttpStatus.OK);
     }
 }
