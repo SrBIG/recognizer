@@ -11,7 +11,7 @@ documentForm.addEventListener('submit', function (e) {
         contentType: false,
         processData: false,
         data: formData,
-        success: function () {
+        success: function (response) {
             // TODO: add handling success
         },
         error: function (message) {
@@ -34,7 +34,7 @@ recognizeForm.addEventListener('submit', function (e) {
         contentType: false,
         processData: false,
         data: formData,
-        success: function () {
+        success: function (response) {
             // TODO: add handling success
         },
         error: function (message) {

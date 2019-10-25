@@ -18,6 +18,10 @@
     <input type="radio" name="language" id="italianLang" value="Italian" checked>
     <label for="spanishLang">Spanish</label>
     <input type="radio" name="language" id="spanishLang" value="Spanish">
+    <label for="englishLang">English</label>
+    <input type="radio" name="language" id="englishLang" value="English" checked>
+    <label for="russianLang">Russian</label>
+    <input type="radio" name="language" id="russianLang" value="Russian">
 
     <button type="submit">
         Upload
