@@ -44,14 +44,15 @@ public class RecognizeUtils {
         Map<String, Integer> image = makeImage(text);
         List<RecognizeResult> results = new ArrayList<>();
         for (Document doc : docs) {
+            int docRank = 0;
             Map<String, Integer> gramWeights = doc.getGramWeight();
             for (Map.Entry<String, Integer> entry : image.entrySet()) {
                 String gram = entry.getKey();
                 Integer gramWeight = entry.getValue();
                 Optional<Integer> docGramRank = Optional.ofNullable(gramWeights.get(gram));
-                Integer rank = Math.abs(docGramRank.orElse(MAX_N_GRAM_NUMBER) - gramWeight);
-                results.add(createRecognizeResult(rank, text, doc));
+                docRank += Math.abs(docGramRank.orElse(MAX_N_GRAM_NUMBER) - gramWeight);
             }
+            results.add(createRecognizeResult(docRank, text, doc));
         }
         return results.stream()
                 .sorted(Comparator.comparingInt(RecognizeResult::getRank))
