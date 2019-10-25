@@ -18,7 +18,7 @@ public class RecognizerController {
     @Autowired
     private DocumentService documentService;
 
-    @PostMapping(name = "/recognize", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
+    @PostMapping(value = "/recognize", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity recognize(@RequestParam("recognitionDoc") MultipartFile file) {
         List<RecognizeResult> recognizeResults = documentService.recognize(file);
         return new ResponseEntity<>(recognizeResults, HttpStatus.OK);
