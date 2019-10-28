@@ -12,7 +12,7 @@ documentForm.addEventListener('submit', function (e) {
         processData: false,
         data: formData,
         success: function (response) {
-            // TODO: add handling success
+            document.getElementById('result').innerHTML = "Document uploaded";
         },
         error: function (message) {
             // TODO: add handling error
@@ -35,7 +35,15 @@ recognizeForm.addEventListener('submit', function (e) {
         processData: false,
         data: formData,
         success: function (response) {
-            // TODO: add handling success
+            let result = "";
+            for (let i = 0; i < response.length; i++) {
+                let recognizeResult = response[i];
+                result += "Tested document:" + recognizeResult.testedDocument + '<br>';
+                result += "Language:" + recognizeResult.language + '<br>';
+                result += "Rank:" + recognizeResult.rank + '<br>';
+                result += '<br>';
+            }
+            document.getElementById('result').innerHTML = result;
         },
         error: function (message) {
             // TODO: add handling error

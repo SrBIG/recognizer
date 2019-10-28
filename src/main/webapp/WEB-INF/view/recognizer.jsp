@@ -19,7 +19,7 @@
     <label for="spanishLang">Spanish</label>
     <input type="radio" name="language" id="spanishLang" value="Spanish">
     <label for="englishLang">English</label>
-    <input type="radio" name="language" id="englishLang" value="English" checked>
+    <input type="radio" name="language" id="englishLang" value="English">
     <label for="russianLang">Russian</label>
     <input type="radio" name="language" id="russianLang" value="Russian">
 
@@ -37,6 +37,10 @@
         Recognize!
     </button>
 </form>
+
+<div id="result">
+
+</div>
 
 <script src="${pageContext.request.contextPath}/recognizeLogic.js"></script>
 </body>
