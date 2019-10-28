@@ -7,9 +7,7 @@ import bsuir.ai.recognizer.repository.DocumentRepository;
 import bsuir.ai.recognizer.util.RecognizeUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
 
-import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
@@ -30,15 +28,14 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public void add(MultipartFile file, String lang) {
+    public void add(String file, String lang) {
         if (Objects.isNull(file) || file.isEmpty()) {
             return;
         }
         try {
-            String text = new String(file.getBytes());
             Language language = Language.parse(lang);
-            Map<String, Integer> image = RecognizeUtils.makeImage(text);
-            Document document = createDocument(text, language, image);
+            Map<String, Integer> image = RecognizeUtils.makeImage(file);
+            Document document = createDocument(file, language, image);
             documentRepository.save(document);
         } catch (Exception e) {
             e.printStackTrace();
@@ -56,19 +53,12 @@ public class DocumentServiceImpl implements DocumentService {
     }
 
     @Override
-    public List<RecognizeResult> recognize(MultipartFile file) {
-        // TODO : add normal file handling
+    public List<RecognizeResult> recognize(String file) {
         if (Objects.isNull(file) || file.isEmpty()) {
             return null;
         }
-        try {
-            String text = new String(file.getBytes());
-            List<Document> docs = documentRepository.findAll();
-            return RecognizeUtils.recognize(text, docs);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return null;
+        List<Document> docs = documentRepository.findAll();
+        return RecognizeUtils.recognize(file, docs);
     }
 
     private Document createDocument(String text, Language language, Map<String, Integer> image) {

@@ -1,5 +1,6 @@
 package bsuir.ai.recognizer.controller;
 
+import bsuir.ai.recognizer.parser.HTMLParser;
 import bsuir.ai.recognizer.service.DocumentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -16,11 +17,13 @@ import org.springframework.web.multipart.MultipartFile;
 public class DocumentController {
     @Autowired
     private DocumentService documentService;
+    @Autowired
+    private HTMLParser parser;
 
     @PostMapping(value = "/upload", consumes = MediaType.MULTIPART_FORM_DATA_VALUE)
     public ResponseEntity uploadDocument(@RequestParam("document") MultipartFile file,
                                          @RequestParam("language") String lang) {
-        documentService.add(file, lang);
+        documentService.add(parser.parse(file), lang);
         return new ResponseEntity(HttpStatus.OK);
     }
 }

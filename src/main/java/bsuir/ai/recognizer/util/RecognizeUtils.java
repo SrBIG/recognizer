@@ -60,7 +60,7 @@ public class RecognizeUtils {
                 Integer gramWeight = entry.getValue();
                 Optional<Integer> docGramRank = Optional.ofNullable(gramWeights.get(gram));
                 // ранг считается как сумма рангов каждого слова, про это есть в методе
-                docRank += Math.abs(docGramRank.orElse(MAX_N_GRAM_NUMBER) - gramWeight);
+                docRank += Math.abs(docGramRank.orElse(gramWeights.size()) - gramWeight);
             }
             results.add(createRecognizeResult(docRank, text, doc));
         }
@@ -79,7 +79,7 @@ public class RecognizeUtils {
     }
 
     private static List<String> extractImportantWords(String text) {
-        String clearText = text.replaceAll("[,.!?:()—\\[\\]]", "");
+        String clearText = text.replaceAll("[,.!?:()—#\\-\\[\\]]", "");
         return Arrays.stream(clearText.split("[\\s\n]"))
                 .filter(word -> word.length() >= N_GRAM_SIZE)
                 .collect(Collectors.toList());
